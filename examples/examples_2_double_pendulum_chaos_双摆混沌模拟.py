@@ -1,7 +1,7 @@
 import numpy as np
-from src.dynamics动力学.analytical分析力学.lagrangian拉格朗日体系 import derive_lagrange_equation
-from src.dynamics动力学.numerical数值方法.ode_solvers import RK4Solver
-from src.visualization可视化模块.animations import animate_pendulum
+from src.src_4_dynamics_动力学.dynamics_2_analytical_分析力学.analytical_1_lagrangian_拉格朗日体系 import derive_lagrange_equation
+from src.src_4_dynamics_动力学.dynamics_3_numerical_数值方法.numerical_1_ode_solvers_微分方程求解器 import RK4Solver
+from src.src_6_visualization_可视化模块.visualization_3_animations_动态可视化 import animate_pendulum
 
 # 系统参数
 m1, m2 = 1.0, 1.0  # 质量

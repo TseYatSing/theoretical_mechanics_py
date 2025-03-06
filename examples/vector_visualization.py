@@ -5,7 +5,7 @@ matplotlib.use('TkAgg')  # 强制使用Tkinter后端
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 # ... 其他代码保持不变 ...
-from src.core.vectors import Vector3D
+from src.src_1_core_核心基础模块.core_1_vectors_矢量运算工具 import Vector3D
 
 
 def plot_3d_vector():

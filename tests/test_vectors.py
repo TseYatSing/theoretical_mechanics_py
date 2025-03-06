@@ -1,7 +1,7 @@
 # tests/test_vectors.py
 import pytest
 import numpy as np
-from src.core.vectors import Vector3D  # 修正后的导入路径
+from src.src_1_core_核心基础模块.core_1_vectors_矢量运算工具 import Vector3D  # 修正后的导入路径
 
 
 def test_vector_operations():

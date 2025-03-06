@@ -1,6 +1,6 @@
 # File: examples/simple_demo.py
-from src.core.vectors import Vector3D
-from src.core.coordinate_systems import CoordinateTransform
+from src.src_1_core_核心基础模块.core_1_vectors_矢量运算工具 import Vector3D
+from src.src_1_core_核心基础模块.core_2_coordinate_systems_坐标系转换 import CoordinateTransform
 
 
 def main():
