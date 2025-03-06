@@ -7,8 +7,8 @@
 """
 import numpy as np
 from scipy.linalg import null_space
-from .force_system import ForceSystem
-
+from src._2_静力学._1_力系分析 import ForceSystem
+from typing import List, Tuple  # 添加这一行
 
 class EquilibriumSolver:
     def __init__(self, force_system: ForceSystem):

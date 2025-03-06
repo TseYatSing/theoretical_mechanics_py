@@ -1,5 +1,8 @@
 # examples/statics/equilibrium_demo.py
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')  # 设置 matplotlib 后端
+import matplotlib.pyplot as plt
 from src._2_静力学._1_力系分析 import Force, ForceSystem
 
 # 创建二维力系
@@ -15,20 +18,20 @@ resultant_force = system.resultant_force
 resultant_moment = system.resultant_moment(np.zeros(2))
 
 print(f"主矢: {resultant_force} N")
-print(f"对原点主矩: {resultant_moment[2]} N·m")  # 二维取Mz
+print(f"对原点主矩: {resultant_moment} N·m")  # 直接打印主矩
 
 # 判断平衡
-equilibrium = np.allclose(resultant_force, 0) and np.isclose(resultant_moment[2], 0)
+equilibrium = np.allclose(resultant_force, 0) and np.isclose(resultant_moment, 0)
 print(f"系统是否平衡: {equilibrium}")
 
 # 可视化力系
-import matplotlib.pyplot as plt
 plt.figure(figsize=(10,6))
 for f in system.forces:
     plt.quiver(f.point[0], f.point[1], f.vector[0], f.vector[1],
                angles='xy', scale_units='xy', scale=1, color=['r','g','b'])
 plt.grid()
 plt.axis('equal')
+plt.gca().set_aspect('equal', adjustable='datalim')  # 添加这一行
 plt.title("Force System Visualization")
 plt.xlabel("X (m)")
 plt.ylabel("Y (m)")

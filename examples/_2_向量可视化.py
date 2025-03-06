@@ -1,4 +1,4 @@
-# 在 向量可视化.py 最前面添加：
+# 在 _2_向量可视化.py 最前面添加：
 import matplotlib
 matplotlib.use('TkAgg')  # 强制使用Tkinter后端
 

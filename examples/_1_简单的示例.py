@@ -1,4 +1,4 @@
-# File: examples/simple_demo.py
+# File: examples/_1_简单的示例.py
 from src._1_核心基础模块._1_矢量运算工具 import Vector3D
 from src._1_核心基础模块._2_坐标系转换 import CoordinateTransform
 

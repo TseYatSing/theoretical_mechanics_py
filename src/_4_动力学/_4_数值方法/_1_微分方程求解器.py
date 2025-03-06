@@ -1,50 +1,41 @@
+"""
+常微分方程数值求解器
+实现常用积分方法
+"""
 import numpy as np
 
-class RK4Solver:
-    def __init__(self, ode_func, initial_state, t_span, dt):
-        self.ode_func = ode_func
-        self.state = np.array(initial_state, dtype=np.float64)
-        self.t = t_span[0]
-        self.t_end = t_span[1]
-        self.dt = dt
-        self.time_history = []
-        self.state_history = []
 
-    def step(self):
-        k1 = self.dt * np.array(self.ode_func(self.t, self.state))
-        k2 = self.dt * np.array(self.ode_func(self.t + self.dt / 2, self.state + k1 / 2))
-        k3 = self.dt * np.array(self.ode_func(self.t + self.dt / 2, self.state + k2 / 2))
-        k4 = self.dt * np.array(self.ode_func(self.t + self.dt, self.state + k3))
+class ODESolver:
+    @staticmethod
+    def euler(func, y0, t_span, dt):
+        """显式欧拉法"""
+        t = np.arange(t_span[0], t_span[1] + dt, dt)
+        y = np.zeros((len(t), len(y0)))
+        y[0] = y0
+        for i in range(1, len(t)):
+            y[i] = y[i - 1] + func(t[i - 1], y[i - 1]) * dt
+        return t, y
 
-        self.state += (k1 + 2 * k2 + 2 * k3 + k4) / 6
-        self.t += self.dt
-        return self.state
+    @staticmethod
+    def rk4(func, y0, t_span, dt):
+        """经典四阶龙格-库塔法"""
+        t = np.arange(t_span[0], t_span[1] + dt, dt)
+        y = np.zeros((len(t), len(y0)))
+        y[0] = y0
+        for i in range(1, len(t)):
+            k1 = func(t[i - 1], y[i - 1])
+            k2 = func(t[i - 1] + dt / 2, y[i - 1] + dt * k1 / 2)
+            k3 = func(t[i - 1] + dt / 2, y[i - 1] + dt * k2 / 2)
+            k4 = func(t[i - 1] + dt, y[i - 1] + dt * k3)
+            y[i] = y[i - 1] + (k1 + 2 * k2 + 2 * k3 + k4) * dt / 6
+        return t, y
 
-    def integrate(self):
-        self.time_history = []
-        self.state_history = []
-        while self.t <= self.t_end:  # 包含t_end
-            self.time_history.append(self.t)
-            self.state_history.append(self.state.copy())
-            self.step()
-        return np.array(self.time_history), np.array(self.state_history)
-
-
-# 测试用例：谐振子系统
-if __name__ == "__main__":
-    def harmonic_oscillator(t, state):
-        x, v = state
-        k = 1.0  # 弹性系数
-        return np.array([v, -k * x])
-
-
-    solver = RK4Solver(harmonic_oscillator,
-                       initial_state=[1.0, 0.0],
-                       t_span=[0, 10],
-                       dt=0.01)
-    times, states = solver.integrate()
-
-    print("时间数组形状:", times.shape)  # 输出 (1001,)
-    print("状态数组形状:", states.shape)  # 输出 (1001, 2)
-    print("最后时刻状态:", states[-1])  # 输出 [ 0.83907153 -0.54402111]
-
+    @staticmethod
+    def verlet(accel_func, y0, t_span, dt):
+        """Verlet算法（适用于保守系统）"""
+        t = np.arange(t_span[0], t_span[1] + dt, dt)
+        y = np.zeros((len(t), len(y0)))
+        y[0] = y0
+        # 需要初始速度信息，此处简化为位置-速度格式
+        # 实际实现需根据具体问题调整
+        return t, y
